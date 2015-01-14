@@ -1,13 +1,12 @@
 module Main (main) where
 
-import Persistance.AstralState (initialState, openLocalState)
+import Api (router)
+import AstralState (initialState, openLocalState)
+import OptCracker (crack, usage)
 import Snap.Http.Server ( defaultConfig
                         , httpServe
                         , setPort )
 import System.Environment (getArgs)
-
-import Server.Api (router)
-import Util.OptCracker (crack, usage)
 
 main :: IO ()
 main = do

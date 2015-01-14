@@ -25,7 +25,7 @@ withAstralServer spec action =
           (\p -> do terminateProcess p
                     void $ waitForProcess p
                     removeDirectoryRecursive "./state")
-          (\_ -> do threadDelay 1000000
+          (\_ -> do threadDelay 100000
                     action)
 
 startSilentProc :: ProcSpec -> IO ProcessHandle

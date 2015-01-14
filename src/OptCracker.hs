@@ -1,4 +1,4 @@
-module Util.OptCracker
+module OptCracker
     ( OptionSet
     , crack
     , usage

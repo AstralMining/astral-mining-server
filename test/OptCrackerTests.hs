@@ -1,6 +1,6 @@
 module OptCrackerTests (suite) where
 
-import Util.OptCracker (OptionSet, crack)
+import OptCracker (crack)
 
 import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.HUnit (testCase)

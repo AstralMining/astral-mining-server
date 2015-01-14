@@ -12,6 +12,7 @@ import Network.Http.Client ( Hostname
                            , buildRequest
                            , concatHandler
                            , emptyBody
+                           , getHeader
                            , getStatusCode
                            , http
                            , openConnection
@@ -24,7 +25,7 @@ import System.IO.Streams (InputStream, OutputStream)
 import qualified System.IO.Streams as Streams
 
 type Url = BS.ByteString
-type ServiceReply = (Int, BS.ByteString)
+type ServiceReply = (Int, Maybe BS.ByteString, BS.ByteString)
 
 get :: Hostname -> Port -> Url -> IO ServiceReply
 get host port url =
@@ -49,4 +50,5 @@ jsonBody :: ToJSON a => a -> OutputStream Builder -> IO ()
 jsonBody payload = Streams.write (Just (fromLazyByteString $ encode payload))
 
 replyHandler :: Response -> InputStream BS.ByteString -> IO ServiceReply
-replyHandler resp i = (getStatusCode resp,) <$> concatHandler resp i
+replyHandler resp i = 
+    (getStatusCode resp, getHeader resp "Set-Cookie",) <$> concatHandler resp i
